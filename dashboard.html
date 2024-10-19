@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EV Energy Management System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .header {
+      background-color: #4CAF50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    
+    .container {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      margin: 20px;
+    }
+    
+    .card {
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      margin: 20px;
+      padding: 20px;
+      text-align: center;
+    }
+    
+    .card h3 {
+      margin-top: 0;
+      color: #003366; /* Changed card title color to dark blue */
+    }
+    
+    .chart {
+      width: 100%;
+      height: 200px;
+      margin: 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    
+    .footer {
+      background-color: #4CAF50;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      position: relative;
+      width: 100%;
+    }
+    
+    .pie-chart {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background-image: conic-gradient(
+        #007bff 0 60%,     /* Motor */
+        #ff9800 60% 75%,   /* HVAC */
+        #ccc 75% 100%      /* Others */
+      );
+      position: relative;
+      margin: auto;
+    }
+    
+    .pie-chart-value {
+      position: absolute;
+      top: 52%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 16px;
+      font-weight: bold;
+      text-align: center;
+      color: #333; /* Changed text color to dark gray for better visibility */
+    }
+    
+    .pie-chart-legend {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    
+    .pie-chart-legend-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    
+    .pie-chart-legend-item span {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <h1>EV Energy Management Dashboard</h1>
+  </header>
+  
+  <main class="container">
+    <!-- Battery Health Card -->
+    <div class="card" id="battery-card">
+      <h3>Battery Health</h3>
+      <div class="chart" id="battery-chart">
+        <p>80%</p>
+      </div>
+    </div>
+    
+    <!-- Energy Consumption Card -->
+    <div class="card" id="energy-card">
+      <h3>Energy Consumption</h3>
+      <div class="chart" id="energy-chart">
+        <p>11.75 kWh</p>
+      </div>
+    </div>
+    
+    <!-- Range Estimation Card -->
+    <div class="card" id="range-card">
+      <h3>Range Estimation</h3>
+      <div class="chart" id="range-chart">
+        <p>250 miles</p>
+      </div>
+    </div>
+    
+    <!-- Regenerative Braking Efficiency Card -->
+    <div class="card" id="regen-card">
+      <h3>Regenerative Braking Efficiency</h3>
+      <div class="chart" id="regen-chart">
+        <p>25%</p>
+      </div>
+    </div>
+    
+    <!-- Energy Savings Card -->
+    <div class="card" id="savings-card">
+      <h3>Energy Savings</h3>
+      <div class="chart" id="savings-chart">
+        <p>5 kWh Saved</p>
+      </div>
+    </div>
+    
+    <!-- Power Usage Breakdown Card -->
+    <div class="card">
+      <h3>Power Usage Breakdown</h3>
+      <div class="chart">
+        <div class="pie-chart"></div>
+        <div class="pie-chart-value">
+          60% Motor<br>15% HVAC<br>25% Others
+        </div>
+        <div class="pie-chart-legend">
+          <div class="pie-chart-legend-item">
+            <span style="background-color: #007bff;"></span>Motor
+          </div>
+          <div class="pie-chart-legend-item">
+            <span style="background-color: #ff9800;"></span>HVAC
+          </div>
+          <div class="pie-chart-legend-item">
+            <span style="background-color: #ccc;"></span>Others
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <footer class="footer">
+    <p>&copy; 2024 EV Energy Management System</p>
+  </footer>
+
+  <script>
+    // Utility function to calculate color based on value (darker green for higher values)
+    function getGreenColor(value) {
+      const greenValue = Math.floor((value / 100) * 255); // Map value to 0-255
+      return `rgb(0, ${greenValue}, 0)`; // RGB for green shades
+    }
+
+    // Apply color based on value
+    document.getElementById("battery-chart").style.backgroundColor = getGreenColor(80);  // 80% Battery
+    document.getElementById("energy-chart").style.backgroundColor = getGreenColor(50);  // Energy consumption (mapped to a 100% scale)
+    document.getElementById("range-chart").style.backgroundColor = getGreenColor(70);  // Estimation of range
+    document.getElementById("regen-chart").style.backgroundColor = getGreenColor(25);  // Regenerative braking
+    document.getElementById("savings-chart").style.backgroundColor = getGreenColor(50);  // Energy Savings (mapped to 50% of a 100% scale)
+  </script>
+</body>
+</html>

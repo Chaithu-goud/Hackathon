@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EV Energy Management System</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .header {
+      background-color: #4CAF50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    
+    .container {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      margin: 20px;
+    }
+    
+    .card {
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      margin: 20px;
+      padding: 20px;
+      text-align: center;
+    }
+    
+    .card h3 {
+      margin-top: 0;
+      color: #003366; /* Card title color */
+    }
+    
+    .chart-container {
+      width: 100%;
+      max-width: 600px;
+      margin: 20px auto;
+    }
+    
+    .footer {
+      background-color: #4CAF50;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      position: relative;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <h1>EV Energy Management Dashboard</h1>
+  </header>
+  
+  <main class="container">
+    <!-- Energy Consumption Graph -->
+    <div class="card">
+      <h3>Energy Consumption Over Time</h3>
+      <div class="chart-container">
+        <canvas id="energyConsumptionChart"></canvas>
+      </div>
+    </div>
+  </main>
+  
+  <footer class="footer">
+    <p>&copy; 2024 EV Energy Management System</p>
+  </footer>
+
+  <script>
+    // Sample data for energy consumption (in kWh) over time (in hours)
+    const labels = ['1 AM', '2 AM', '3 AM', '4 AM', '5 AM', '6 AM', '7 AM', '8 AM'];
+    const data = {
+      labels: labels,
+      datasets: [{
+        label: 'Energy Consumption (kWh)',
+        data: [0.8, 1.2, 1.0, 0.9, 1.1, 1.5, 1.3, 1.7], // Energy consumption data
+        fill: false,
+        borderColor: 'rgb(75, 192, 192)',
+        tension: 0.1
+      }]
+    };
+
+    // Configuring the chart
+    const config = {
+      type: 'line', // Use a 'line' chart for energy consumption over time
+      data: data,
+      options: {
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: 'Time of Day'
+            }
+          },
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Energy (kWh)'
+            }
+          }
+        }
+      }
+    };
+
+    // Render the chart
+    const energyConsumptionChart = new Chart(
+      document.getElementById('energyConsumptionChart'),
+      config
+    );
+  </script>
+</body>
+</html>
